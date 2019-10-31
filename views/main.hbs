@@ -1,15 +1,25 @@
 <html>
     <head>
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
-    {{#if tileCSS}}
-        <link rel="stylesheet" href="stylesheet.css">
-    {{/if}}
-    <script src="inputcontrol.js"></script>
-    <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+        {{#if tilesCSS}}
+            <link rel="stylesheet" href="css/tileContainer.css">
+        {{/if}}
+        {{#if summaryJS}}
+            <script src="js/summary.js"></script>
+        {{/if}}
+        {{#if gamestartJS}}
+            <script src="js/gamestart.js"></script>
+        {{/if}}
+        {{#if addScoreJS}}
+            <script src="js/addScore.js"></script>
+        {{/if}}
+        {{#if leaderboardJS}}
+            <script src="js/leaderboard.js"></script>
+        {{/if}}
+        <script src="js/inputcontrol.js"></script>
+        <meta charset="utf-8">
     </head>
     <body>
-        <div id="tile-container">
-            {{{ body }}}
-        </div>
+        {{{ body }}}
     </body>
 </html>

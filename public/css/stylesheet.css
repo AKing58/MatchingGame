@@ -1,0 +1,204 @@
+#tile-container {
+    padding: 10px;
+    width:300px;
+    height:300px;
+    background-color:limegreen;
+    position: fixed;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#container-cover{
+    z-index: 10;
+    opacity: 0.5;
+    background-color: green; 
+    width: 320px;
+    height: 320px;
+    position: fixed;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.blankrow {
+    height:10px;
+    background-color: cornflowerblue;
+    border-radius: 10px;
+}
+
+#score-holder{
+    padding: 10px;
+    width: 300px;
+    max-height: 500px;
+    overflow: auto;
+    background-color: salmon;
+    font-family: monospace;
+}
+
+th{
+    text-align: left;
+}
+
+tr{
+    margin-top: 10px;
+}
+
+td{
+    padding: 0px;
+}
+
+#btnStartRound{
+    z-index: 11;
+    opacity: 1;
+    position: fixed;
+    height: 100px;
+    width: fit-content;
+    font-size: 12pt;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.entry {
+    width:fit-content;
+    border: 1px solid black;
+}
+
+.nodeButton{
+    width: fit-content;
+    font-size: 12pt;
+}
+
+#game-container {
+    position: fixed;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.rotate1 {
+    animation-name: rotate1;
+    animation-fill-mode: forwards;
+    animation-duration: 2000ms;
+}
+
+.rotate2 {
+    animation-name: rotate2;
+    animation-fill-mode: forwards;
+    animation-duration: 2000ms;
+}
+
+.rotate3 {
+    animation-name: rotate3;
+    animation-fill-mode: forwards;
+    animation-duration: 2000ms;
+}
+
+.rotate4 {
+    animation-name: rotate4;
+    animation-fill-mode: forwards;
+    animation-duration: 2000ms;
+}
+
+.flip1 {
+    animation-name: flip1;
+    animation-fill-mode: forwards;
+    animation-duration: 250ms;
+}
+
+.flip2 {
+    animation-name: flip2;
+    animation-fill-mode: forwards;
+    animation-duration: 250ms;
+}
+.flip3 {
+    animation-name: flip3;
+    animation-fill-mode: forwards;
+    animation-duration: 250ms;
+}
+.flip4 {
+    animation-name: flip4;
+    animation-fill-mode: forwards;
+    animation-duration: 250ms;
+}
+
+@keyframes flip1 {
+    from {
+        transform: rotateY(0deg);
+    }
+    to{
+        transform: rotateY(90deg);
+    }
+}
+
+@keyframes flip2 {
+    from {
+        transform: rotateY(90deg);
+    }
+    to{
+        transform: rotateY(180deg);
+    }
+}
+
+@keyframes flip3 {
+    from {
+        transform: rotateY(180deg);
+    }
+    to{
+        transform: rotateY(90deg);
+    }
+}
+
+@keyframes flip4 {
+    from {
+        transform: rotateY(90deg);
+    }
+    to{
+        transform: rotateY(0deg);
+    }
+}
+
+@keyframes rotate1 {
+    from {
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(90deg);
+    }
+}
+
+@keyframes rotate2 {
+    from {
+        transform: rotate(90deg);
+    }
+    to{
+        transform: rotate(180deg);
+    }
+}
+
+@keyframes rotate3 {
+    from {
+        transform: rotate(180deg);
+    }
+    to{
+        transform: rotate(270deg);
+    }
+}
+
+@keyframes rotate4 {
+    from {
+        transform: rotate(270deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}

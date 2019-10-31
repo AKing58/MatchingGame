@@ -1,0 +1,29 @@
+
+<table id="score-holder">
+    <tr>
+        <th>Rank</th>
+        <th>Name</th>
+        <th>Score</th>
+    </tr>
+    <tr>
+        <td class="entry" id="curRank"></td>
+        <td class="entry" id="curName"></td>
+        <td class="entry" id="curScore"></td>
+    </tr>
+    <tr class="blankrow">
+        <td style="text-align:center" colspan="3">----------</td>
+    </tr>
+    {{#each entry}}
+    <tr>
+        <td class="entry">{{this.rank}}</td>
+        <td class="entry">{{this.name}}</td>
+        <td class="entry">{{this.score}}</td>
+    </tr>
+    {{/each}}
+</table>
+<form method="POST" action="/">
+    <input class="nodeButton" id="btnMenu" type="submit" value="Go To Menu">
+</form>
+<form method="POST" action="/game">
+    <input class="nodeButton" id="btnGame" type="submit" value="RESTART">
+</form>

@@ -1,3 +1,16 @@
-{{#each tile}}
-<div class="tile" id="{{this.id}}"></div>
-{{/each}}
+<div id="game-container">
+    <div id="container-cover"></div>
+    <button id="btnStartRound" onclick="StartRound()">Start the game</button>
+    <div id="tile-container">
+        {{#each tile}}
+        <div class="tile" id="{{this.id}}" onclick="ClickTile({{this.id}})">{{this.id}}</div>
+        {{/each}}
+    </div>
+    
+    <h3>Score:<span id="score">5</span></h3>
+    <form method="POST" onsubmit="return confirm('Are you sure you want to end the game?')" action="/finishGame">
+        <input name="score" type="text" style="display: none;">
+        <input class="nodeButton" id="btnEndGame" type="submit" value="End Game">
+    </form>
+</div>
+

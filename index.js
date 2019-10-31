@@ -27,5 +27,6 @@ let gameRoutes = require('./routes/game');
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(gameRoutes);
-let port = process.end.PORT || 3000;
+let port = process.env.PORT || 3000;
+//let port = 3000;
 app.listen(port, () => console.log("Server Ready"));
