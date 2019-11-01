@@ -36,7 +36,6 @@ function GetLeaderboard(callback){
     db.execute('SELECT * FROM Leaderboard', function(err,results,fields){
         for(let i=0; i<results.length;i++){
             let curEntry = {
-                id: results[i].id,
                 name: results[i].name,
                 score: results[i].score
             }

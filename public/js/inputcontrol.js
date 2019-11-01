@@ -2,7 +2,7 @@ let level = 1;
 
 let score = 5;
 
-let curSize = 59;
+let curSize = 60;
 let width = 300;
 let height = 300;
 let column = 5;
@@ -17,17 +17,21 @@ let IsStarting = false;
 
 let numOfTargets = 5;
 
+let GotWrong = false;
+
 function StartRound(){
     window.localStorage.setItem("Score", score);
     document.getElementById("btnStartRound").style.display = "none";
     document.getElementById("container-cover").style.display = "none";
     document.getElementById("score").value = score;
     IsStarting = true;
+    GotWrong = false;
     setTimeout(ResetStarting, 5000)
     let container = document.getElementById("tile-container");
 
     let tempList = [];
     targetList = [];
+    hitList = [];
 
     for(let i=0; i<container.childElementCount; i++){
         tempList.push(container.children[i].id);
@@ -35,13 +39,9 @@ function StartRound(){
 
     while(targetList.length < numOfTargets){
         let curTarget = Math.floor(Math.random() * ((tempList.length-1) - 0)) + 0;
-        
-        console.log(tempList[curTarget]);
         targetList.push(tempList[curTarget]);
         tempList.splice(curTarget, 1);
     }
-
-    hitList = targetList.map((x)=>x);
     
     
     targetList.forEach(function(item, index, object) {
@@ -59,50 +59,57 @@ function ClickTile(input){
     if(!IsStarting){
         if(targetList.includes("" + input)){
             score += 1;
+            hitList.push(""+input);
             FlipTilePickedRight(input);
             targetList.splice(targetList.indexOf(""+input), 1);
         }else if(hitList.includes("" + input)){
             console.log("" + input + " has already been hit");
-            console.log(targetList);
         }else{
             score -= 1;
+            hitList.push(""+input);
             let audio = new Audio("sounds/Computer-Error-Alert.mp3");
             audio.play();
-            if(score <= 0){
-                window.localStorage.setItem("Score", score);
-                document.getElementById("btnEndGame").click();
-            }
-            console.log("" + input + " is not a target");
+            GotWrong = true;
             FlipTilePickedWrong(input);
-            IsStarting = true;
-            let picker = Math.floor(Math.random() * (2));
-            console.log("wrong rolled " + picker);
-            if(picker % 2==0){
-                setTimeout(RemoveTileLine, 1000);
-            }else{
-                numOfTargets--;
-                setTimeout(ShowBoard, 500);
-                setTimeout(ResetBoard, 2000);
+            if(score <= 0){
+                IsStarting = true;
+                window.localStorage.setItem("Score", score);
+                setTimeout(Terminate, 2000);
             }
         }
         if(targetList.length == 0){
             let audio = new Audio("sounds/Electronic_Chime-KevanGC.mp3");
             audio.play();
             IsStarting = true;
-            let picker = Math.floor(Math.random() * (2));
-            console.log("complete rolled " + picker);
-            if(picker % 2==0){
-                setTimeout(AddTileLine, 1000);
+            if(!GotWrong){
+                let picker = Math.floor(Math.random() * (2));
+                if(picker % 2==0){
+                    setTimeout(AddTileLine, 2000);
+                }else{
+                    numOfTargets++;
+                    setTimeout(ResetBoard, 1000);
+                }
             }else{
-                numOfTargets++;
-                setTimeout(ResetBoard, 1000);
+                let picker = Math.floor(Math.random() * (2));
+                if(picker % 2==0){
+                    setTimeout(RemoveTileLine, 2000);
+                }else{
+                    numOfTargets--;
+                    setTimeout(ShowBoard, 500);
+                    setTimeout(ResetBoard, 2000);
+                }
             }
+            
         }
     }else{
         console.log("Round is still starting");
     }
     window.localStorage.setItem("Score", score);
     document.getElementById("score").textContent = score;
+}
+
+function Terminate(){
+    document.getElementById("btnEndGame").click();
 }
 
 //Adds a column or row of columns
@@ -117,7 +124,6 @@ function AddTileLine(){
             tile.id = container.childElementCount;
             tile.style.backgroundColor = "grey";
             tile.setAttribute("onclick", "ClickTile(" + container.childElementCount + ")");
-            tile.textContent = container.childElementCount;
             container.appendChild(tile);
         }
         row++;
@@ -130,13 +136,12 @@ function AddTileLine(){
             tile.id = container.childElementCount;
             tile.style.backgroundColor = "grey";
             tile.setAttribute("onclick", "ClickTile(" + container.childElementCount + ")");
-            tile.textContent = container.childElementCount;
             container.appendChild(tile);
         }
         column++;
     }
     level++;
-    ResetBoard();
+    setTimeout(ResetBoard,1000);
 }
 
 //Adds a column or row of columns
@@ -163,7 +168,7 @@ function RemoveTileLine(){
         console.log("removing " + row);
     }
     level--;
-    ResetBoard();
+    setTimeout(ResetBoard,1500);
 }
 
 function ResetBoard(){
@@ -228,7 +233,7 @@ function ColorTileHidden(input){
 }
 
 function FlipTileWrong(input){
-    FlipTile3(input);
+    FlipTile1(input);
     setTimeout(ColorTileWrong, 250, input);
     setTimeout(ColorTileHidden, 750, input);
 }
@@ -256,5 +261,4 @@ function FlipTilePickedRight(input){
 function FlipTilePickedWrong(input){
     FlipTile3(input);
     setTimeout(ColorTileWrong, 250, input);
-    setTimeout(ColorTileHidden, 750, input);
 }
